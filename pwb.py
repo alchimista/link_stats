@@ -108,6 +108,7 @@ def run_python_file(filename, argv, argvu, package=None):
         sys.path[0] = old_path0
         pwb.argvu = old_argvu
 
+
 # end of snippet from coverage
 
 
@@ -174,7 +175,7 @@ def check_modules(script=None):
     version_conflicts = []
     for requirement in pkg_resources.parse_requirements(dependencies):
         if requirement.marker is None \
-           or pkg_resources.evaluate_marker(str(requirement.marker)):
+                or pkg_resources.evaluate_marker(str(requirement.marker)):
             try:
                 pkg_resources.resource_exists(requirement, requirement.name)
             except pkg_resources.DistributionNotFound as e:
@@ -227,6 +228,7 @@ try:
 except RuntimeError:
     os.environ['PYWIKIBOT_NO_USER_CONFIG'] = '2'
     import pywikibot as pwb
+
     # user-config.py to be created
     if filename is not None and not (filename.startswith('generate_')
                                      or filename == 'version.py'):
