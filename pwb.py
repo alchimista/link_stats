@@ -169,7 +169,10 @@ def check_modules(script=None):
             from pathlib2 import Path
         dependencies = script_deps.get(Path(script).name, [])
     else:
-        from setup import dependencies
+        try:
+            from setup import dependencies
+        except:
+            pass
 
     missing_requirements = []
     version_conflicts = []
@@ -391,4 +394,3 @@ def main():
 if __name__ == '__main__':
     if not main():
         print(__doc__)
-

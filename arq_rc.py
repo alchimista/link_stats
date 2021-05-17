@@ -26,17 +26,21 @@ class arquivo():
                 pass
         else:
             url = 'https://stream.wikimedia.org/v2/stream/recentchange'
-            for event in EventSource(url):
-                if event.event == 'message' and event.data:
-                    entry = json.loads(event.data)
-                    if (entry['type'] == 'edit') and (not entry['bot']) and (
-                            entry['wiki'] == 'ptwiki'):
-                        yield entry
+            try:
+
+                for event in EventSource(url):
+                    if event.event == 'message' and event.data:
+                        entry = json.loads(event.data)
+                        if (entry['type'] == 'edit') and (not entry['bot']) and (
+                                entry['wiki'] == 'ptwiki'):
+                            yield entry
 
 
-                elif event.event == 'error':
-                    print('--- Encountered error', event.data)
-                    pass
+                    elif event.event == 'error':
+                        print('--- Encountered error', event.data)
+                        pass
+            except Exception as e:
+                print(e)
 
     def has_url(self, string):
 
